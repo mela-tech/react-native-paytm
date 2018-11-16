@@ -20,17 +20,18 @@ RCT_EXPORT_METHOD(startPayment: (NSDictionary *)details)
     PGMerchantConfiguration *mc = [PGMerchantConfiguration defaultConfiguration];
     NSMutableDictionary *orderDict = [NSMutableDictionary new];
 
-    orderDict[@"MID"] = details[@"mid"];
-    orderDict[@"CHANNEL_ID"] = details[@"channel"];
-    orderDict[@"INDUSTRY_TYPE_ID"] = details[@"industryType"];
-    orderDict[@"WEBSITE"] = details[@"website"];
-    orderDict[@"TXN_AMOUNT"] = details[@"amount"];
-    orderDict[@"ORDER_ID"] = details[@"orderId"];
-    orderDict[@"EMAIL"] = details[@"email"];
-    orderDict[@"MOBILE_NO"] = details[@"phone"];
-    orderDict[@"CUST_ID"] = details[@"custId"];
-    orderDict[@"CHECKSUMHASH"] = details[@"checksumhash"];
-    orderDict[@"CALLBACK_URL"] = details[@"callback"];
+    orderDict[@"MID"] = details[@"MID"];
+    orderDict[@"CHANNEL_ID"] = details[@"CHANNEL_ID"];
+    orderDict[@"INDUSTRY_TYPE_ID"] = details[@"INDUSTRY_TYPE_ID"];
+    orderDict[@"WEBSITE"] = details[@"WEBSITE"];
+    orderDict[@"TXN_AMOUNT"] = details[@"TXN_AMOUNT"];
+    orderDict[@"ORDER_ID"] = details[@"ORDER_ID"];
+    orderDict[@"EMAIL"] = details[@"EMAIL"];
+    orderDict[@"MOBILE_NO"] = details[@"MOBILE_NO"];
+    orderDict[@"CUST_ID"] = details[@"CUST_ID"];
+    orderDict[@"CHECKSUMHASH"] = details[@"CHECKSUMHASH"];
+    orderDict[@"CALLBACK_URL"] = details[@"CALLBACK_URL"];
+    orderDict[@"MERC_UNQ_REF"] = details[@"MERC_UNQ_REF"];
 
     PGOrder *order = [PGOrder orderWithParams:orderDict];
 

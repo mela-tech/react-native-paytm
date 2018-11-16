@@ -54,17 +54,18 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
         Service = PaytmPGService.getStagingService();
     }
     Map<String, String> paramMap = new HashMap<String, String>();
-    paramMap.put("ORDER_ID", options.getString("orderId"));
-    paramMap.put("MID", options.getString("mid"));
-    paramMap.put("CUST_ID", options.getString("custId"));
-    paramMap.put("CHANNEL_ID", options.getString("channel"));
-    paramMap.put("INDUSTRY_TYPE_ID", options.getString("industryType"));
-    paramMap.put("WEBSITE", options.getString("website"));
-    paramMap.put("TXN_AMOUNT", options.getString("amount"));
-    paramMap.put("EMAIL", options.getString("email"));
-    paramMap.put("MOBILE_NO", options.getString("phone"));
-    paramMap.put("CALLBACK_URL", options.getString("callback"));
-    paramMap.put("CHECKSUMHASH", options.getString("checksumhash"));
+    paramMap.put("ORDER_ID", options.getString("ORDER_ID"));
+    paramMap.put("MID", options.getString("MID"));
+    paramMap.put("CUST_ID", options.getString("CUST_ID"));
+    paramMap.put("CHANNEL_ID", options.getString("CHANNEL_ID"));
+    paramMap.put("INDUSTRY_TYPE_ID", options.getString("INDUSTRY_TYPE_ID"));
+    paramMap.put("WEBSITE", options.getString("WEBSITE"));
+    paramMap.put("TXN_AMOUNT", options.getString("TXN_AMOUNT"));
+    paramMap.put("EMAIL", options.getString("EMAIL"));
+    paramMap.put("MOBILE_NO", options.getString("MOBILE_NO"));
+    paramMap.put("CALLBACK_URL", options.getString("CALLBACK_URL"));
+    paramMap.put("CHECKSUMHASH", options.getString("CHECKSUMHASH"));
+    paramMap.put("MERC_UNQ_REF", options.getString("MERC_UNQ_REF"));
     PaytmOrder Order = new PaytmOrder(paramMap);
 
 /*
@@ -133,7 +134,7 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
         params.putString("status", "Cancelled");
         sendEvent( "PayTMResponse", params);
       }
-    });      
+    });
   }
 
   private void sendEvent(String eventName, @Nullable WritableMap params) {
@@ -141,5 +142,5 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
       .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
       .emit(eventName, params);
   }
-   
+
 }

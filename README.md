@@ -38,13 +38,13 @@ const paytmConfig = {
   CALLBACK_URL: 'https://securegw.paytm.in/theia/paytmCallback?ORDER_ID='
 }
 
-componentWillMount(){
+componentWillMount() {
     ...
-	if(Platform.OS == 'ios'){
+	if (Platform.OS === 'ios') {
       const { RNPayTm } = NativeModules
       const emitter = new NativeEventEmitter(RNPayTm)
       emitter.addListener('PayTMResponse', this.onPayTmResponse)
-    }else{
+    } else {
       DeviceEventEmitter.addListener('PayTMResponse', this.onPayTmResponse)
     }
     ...
@@ -57,22 +57,24 @@ onPayTmResponse(response) {
   console.log(response);
 }
 
-runTransaction(amount, customerId, orderId, mobile, email, checkSum) {
+runTransaction(amount, customerId, orderId, mobile, email, checkSum, MERC_UNQ_REF) {
     const callbackUrl = `${paytmConfig.CALLBACK_URL}${orderId}`;
     const details = {
       mode: 'Staging', // 'Staging' or 'Production'
-      mid: paytmConfig.MID,
-      industryType: paytmConfig.INDUSTRY_TYPE_ID,
-      website: paytmConfig.WEBSITE,
-      channel: paytmConfig.CHANNEL_ID,
-      amount: `${amount}`, // String
-      orderId: orderId, // String
-      email: email, // String
-      phone: mobile, // String
-      custId: customerId, // String
-      checksumhash: checkSum, //From your server using PayTM Checksum Utility 
-      callback: callbackUrl
+      MID: paytmConfig.MID,
+      INDUSTRY_TYPE_ID: paytmConfig.INDUSTRY_TYPE_ID,
+      WEBSITE: paytmConfig.WEBSITE,
+      CHANNEL_ID: paytmConfig.CHANNEL_ID,
+      TXN_AMOUNT: `${amount}`, // String
+      ORDER_ID: orderId, // String
+      EMAIL: email, // String
+      MOBILE_NO: mobile, // String
+      CUST_ID: customerId, // String
+      CHECKSUMHASH: checkSum, //From your server using PayTM Checksum Utility 
+      MERC_UNQ_REF: MERC_UNQ_REF,
+      CALLBACK_URL: callbackUrl,
     };
+    
     paytm.startPayment(details);
 }
 ```
