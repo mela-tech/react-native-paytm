@@ -65,7 +65,6 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
     paramMap.put("MOBILE_NO", options.getString("MOBILE_NO"));
     paramMap.put("CALLBACK_URL", options.getString("CALLBACK_URL"));
     paramMap.put("CHECKSUMHASH", options.getString("CHECKSUMHASH"));
-    paramMap.put("MERC_UNQ_REF", options.getString("MERC_UNQ_REF"));
     PaytmOrder Order = new PaytmOrder(paramMap);
 
 /*
@@ -80,58 +79,58 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
     Service.startPaymentTransaction(getCurrentActivity(), true, true, new PaytmPaymentTransactionCallback() {
       @Override
       public void someUIErrorOccurred(String inErrorMessage) {
-        Log.d("LOG", "PayTM Error: Some UI Error Occurred " + inErrorMessage);
+        Log.d("RNPayTm", "Some UI Error Occurred: " + inErrorMessage);
         WritableMap params = new WritableNativeMap();
-        params.putString("status", "UIErrorOccurred");
+        params.putString("event", "UIErrorOccurred");
         sendEvent( "PayTMResponse", params);
       }
 
       @Override
       public void onTransactionResponse(Bundle inResponse) {
-        Log.d("LOG", "Payment Transaction Resnponse " + inResponse);
+        Log.d("RNPayTm", "Payment Transaction Response: " + inResponse);
         WritableMap params = Arguments.fromBundle(inResponse);
-        params.putString("status", "Response");
+        params.putString("event", "TransactionResponse");
         sendEvent( "PayTMResponse", params);
       }
 
       @Override
       public void networkNotAvailable() {
-        Log.d("LOG", "Network Not Available");
+        Log.d("RNPayTm", "Network Not Available");
         WritableMap params = new WritableNativeMap();
-        params.putString("status", "NetworkNotAvailable");
+        params.putString("event", "NetworkNotAvailable");
         sendEvent( "PayTMResponse", params);
       }
 
       @Override
       public void clientAuthenticationFailed(String inErrorMessage) {
-        Log.d("LOG", "Clinet Authentication Failed" + inErrorMessage);
+        Log.d("RNPayTm", "Client Authentication Failed: " + inErrorMessage);
         WritableMap params = new WritableNativeMap();
-        params.putString("status", "ClientAuthenticationFailed");
+        params.putString("event", "ClientAuthenticationFailed");
         sendEvent( "PayTMResponse", params );
       }
 
       @Override
       public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl) {
-        Log.d("LOG", "Error Loading WebPage" + inErrorMessage);
+        Log.d("RNPayTm", "Error Loading WebPage: " + inErrorMessage);
         WritableMap params = new WritableNativeMap();
-        params.putString("status", "ErrorLoadingWebPage");
+        params.putString("event", "ErrorLoadingWebPage");
         sendEvent( "PayTMResponse", params );
       }
 
       // had to be added: NOTE
       @Override
       public void onBackPressedCancelTransaction() {
-        Log.d("LOG", "Cancelled: Back");
+        Log.d("RNPayTm", "Transaction cancelled: BackPressedCancelTransaction");
         WritableMap params = new WritableNativeMap();
-        params.putString("status", "Cancelled: Back");
+        params.putString("event", "BackPressedCancelTransaction");
         sendEvent( "PayTMResponse", params);
       }
 
       @Override
       public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
-        Log.d("LOG", "Cancelled: " + inErrorMessage);
+        Log.d("RNPayTm", "Transaction cancelled: " + inErrorMessage);
         WritableMap params = Arguments.fromBundle(inResponse);
-        params.putString("status", "Cancelled");
+        params.putString("event", "TransactionCancel");
         sendEvent( "PayTMResponse", params);
       }
     });

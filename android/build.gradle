@@ -12,12 +12,12 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         ndk {
@@ -30,7 +30,9 @@ android {
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
-    compile files('libs/PGSDK_V2.1.jar')
+    implementation 'com.facebook.react:react-native:+'
+    implementation('com.paytm:pgplussdk:1.2.3') {
+        transitive = true
+    }
 }
 
