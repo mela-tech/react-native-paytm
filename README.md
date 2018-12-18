@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/dependency-version/:@philly25/react-native-paytm/:dependency.svg)
+![](https://badge.fury.io/js/%40philly25%2Freact-native-paytm.svg)
 
 # react-native-paytm
 This library has been forked from https://github.com/elanic-tech/react-native-paytm
