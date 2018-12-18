@@ -4,8 +4,7 @@
 
 @implementation RNPayTm
 
-
-//PGTransactionViewController* txnController;
+UIViewController* rootVC;
 
 RCT_EXPORT_MODULE()
 
@@ -13,14 +12,13 @@ RCT_EXPORT_METHOD(startPayment: (NSDictionary *)details)
 {
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *cookie in [storage cookies]) {
-      [storage deleteCookie:cookie];
+        [storage deleteCookie:cookie];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
-
-    PGMerchantConfiguration *mc = [PGMerchantConfiguration defaultConfiguration];
+    
     NSMutableDictionary *orderDict = [NSMutableDictionary new];
     NSString* mode = details[@"mode"];
-
+    
     orderDict[@"MID"] = details[@"MID"];
     orderDict[@"CHANNEL_ID"] = details[@"CHANNEL_ID"];
     orderDict[@"INDUSTRY_TYPE_ID"] = details[@"INDUSTRY_TYPE_ID"];
@@ -32,36 +30,31 @@ RCT_EXPORT_METHOD(startPayment: (NSDictionary *)details)
     orderDict[@"CUST_ID"] = details[@"CUST_ID"];
     orderDict[@"CHECKSUMHASH"] = details[@"CHECKSUMHASH"];
     orderDict[@"CALLBACK_URL"] = details[@"CALLBACK_URL"];
-
+    
     PGOrder *order = [PGOrder orderWithParams:orderDict];
-
-    PGTransactionViewController *txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];
-    txnController.loggingEnabled = YES;
+    
+    PGTransactionViewController* txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];
     
     if ([mode isEqualToString:@"Staging"]) {
         txnController.serverType = eServerTypeStaging;
+        txnController.loggingEnabled = YES;
+        txnController.useStaging = YES;
     } else if ([mode isEqualToString:@"Production"]) {
         txnController.serverType = eServerTypeProduction;
     } else
         return;
     
     txnController.merchant = [PGMerchantConfiguration defaultConfiguration];
+    txnController.title = @"Paytm payment";
     txnController.delegate = self;
-    [self.navigationController pushViewController:txnController animated:YES];
     
-    //PGTransactionViewController and set the serverType to eServerTypeProduction
-//    txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];
-//    txnController.serverType = eServerTypeStaging;
-//    txnController.merchant = mc;
-//    txnController.delegate = self;
-//    txnController.title = @"Paytm payment";
-//
-//    UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-//
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [rootVC presentViewController:txnController animated:YES completion:nil];
-//      });
-
+    rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [rootVC presentViewController:txnController animated:YES completion:nil];
+    });
+    
+    //    [rootVC.navigationController pushViewController:txnController animated:YES];
 }
 
 - (NSArray<NSString *> *)supportedEvents
@@ -69,70 +62,36 @@ RCT_EXPORT_METHOD(startPayment: (NSDictionary *)details)
     return @[@"PayTMResponse"];
 }
 
-
 //this function triggers when transaction gets finished
 -(void)didFinishedResponse:(PGTransactionViewController *)controller response:(NSString *)responseString {
     [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Success", @"response":responseString}];
-    [controller.navigationController popViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
+
 //this function triggers when transaction gets cancelled
 -(void)didCancelTrasaction:(PGTransactionViewController *)controller {
-    [_statusTimer invalidate];
+    //    [_statusTimer invalidate];
     NSString *msg = [NSString stringWithFormat:@"UnSuccessful"];
-
-    [[[UIAlertView alloc] initWithTitle:@"Transaction Cancel" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-    [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Cancel", @"response":msg}];
-    [controller.navigationController popViewControllerAnimated:YES];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Cancel transaction" message:msg preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Cancel", @"response":msg}];
+        [rootVC dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [controller dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [controller presentViewController:alertController animated:YES completion:nil];
+    
+    //    [[[UIAlertView alloc] initWithTitle:@"Transaction Cancel" message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    //    [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Cancel", @"response":msg}];
+    //    [controller dismissViewControllerAnimated:YES completion:nil];
 }
+
 //Called when a required parameter is missing.
 -(void)errorMisssingParameter:(PGTransactionViewController *)controller error:(NSError *) error {
-    [controller.navigationController popViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
-
-
-
-
-//-(void)didFinishedResponse:(PGTransactionViewController *)controller response:(NSDictionary *)response {
-//
-//    [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Response", @"response":response}];
-//    [txnController dismissViewControllerAnimated:YES completion:nil];
-//}
-//
-////Called when a transaction has completed. response dictionary will be having details about Transaction.
-//- (void)didSucceedTransaction:(PGTransactionViewController *)controller
-//     response:(NSDictionary *)response{
-//  NSString *str = [NSString stringWithFormat:@"%@", response];
-//
-//  [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Success", @"response":str}];
-//  [txnController dismissViewControllerAnimated:YES completion:nil];
-//}
-//
-////Called when a transaction is failed with any reason. response dictionary will be having details about failed Transaction.
-//- (void)didFailTransaction:(PGTransactionViewController *)controller
-//     error:(NSError *)error
-//  response:(NSDictionary *)response{
-//  NSString *str = [NSString stringWithFormat:@"%@", response];
-//
-//    [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Failed", @"response":str}];
-//  [txnController dismissViewControllerAnimated:YES completion:nil];
-//
-//}
-//
-////Called when a transaction is Canceled by User. response dictionary will be having details about Canceled Transaction.
-//- (void)didCancelTransaction:(PGTransactionViewController *)controller
-//       error:(NSError *)error
-//    response:(NSDictionary *)response{
-//  NSString *str = [NSString stringWithFormat:@"%@", response];
-//
-//        [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Cancelled", @"response":str}];
-//  [txnController dismissViewControllerAnimated:YES completion:nil];
-//}
-//
-//- (void)didFinishCASTransaction:(PGTransactionViewController *)controller
-//       error:(NSError *)error
-//    response:(NSDictionary *)response{
-//  NSString *str = [NSString stringWithFormat:@"%@", response];
-//     [self sendEventWithName:@"PayTMResponse" body:@{@"status":@"Checksum Finished", @"response":str}];
-//}
 
 @end
