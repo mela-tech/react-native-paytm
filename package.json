@@ -1,26 +1,33 @@
-
 {
-  "name": "react-native-paytm",
-  "version": "1.0.4",
+  "name": "@philly25/react-native-paytm",
+  "version": "1.0.5",
   "description": "A react native wrapper for PayTM",
-    "main": "index.js",
-    "repository" :{
-	"type" : "git",
-	"url" : "https://github.com/tejashwikalptaru/react-native-paytm"
-    },
-    "_npmUser": {
-    "email": "tejashwi.1991@gmail.com",
-    "name": "tejashwikalptaru"
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opsway/react-native-paytm.git"
+  },
+  "_npmUser": {
+    "email": "baldinant@gmail.com",
+    "name": "philly25"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "paytm"
   ],
-  "author": "",
-  "license": "",
+  "author": "Anton Baldin <baldinant@gmail.com>",
+  "license": "ISC",
   "peerDependencies": {
     "react-native": "^0.50.4"
+  },
+  "bugs": {
+    "url": "https://github.com/opsway/react-native-paytm/issues"
+  },
+  "homepage": "https://github.com/opsway/react-native-paytm#readme",
+  "directories": {
+    "example": "example"
   }
 }

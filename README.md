@@ -1,11 +1,8 @@
+![npm](https://img.shields.io/npm/dependency-version/:@philly25/react-native-paytm/:dependency.svg)
 
 # react-native-paytm
 This library has been forked from https://github.com/elanic-tech/react-native-paytm
-Updated it to work with the latest version of react-native and latest PayTM SDK. Improved the documentaion as well.
-
-## Getting started
-
-Alert: Built and tested only for iOS.
+Updated it to work with the latest version of react-native and latest PayTM SDK.
 
 ### installation
 
@@ -27,7 +24,7 @@ react-native link react-native-paytm
 import paytm from 'react-native-paytm';
 import { ..., Platform, DeviceEventEmitter, NativeModules, NativeEventEmitter, ... } from 'react-native';
 
-....
+...
 
 // Daat received from PayTM
 const paytmConfig = {
@@ -71,7 +68,6 @@ runTransaction(amount, customerId, orderId, mobile, email, checkSum, MERC_UNQ_RE
       MOBILE_NO: mobile, // String
       CUST_ID: customerId, // String
       CHECKSUMHASH: checkSum, //From your server using PayTM Checksum Utility 
-      MERC_UNQ_REF: MERC_UNQ_REF,
       CALLBACK_URL: callbackUrl,
     };
     
