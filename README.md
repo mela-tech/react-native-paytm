@@ -4,7 +4,11 @@
 This library has been forked from https://github.com/elanic-tech/react-native-paytm
 Updated it to work with the latest version of react-native and latest PayTM SDK.
 
-### installation
+### Installation
+
+````bash
+npm i --save @philly25/react-native-paytm
+````
 
 #### Android
 ````bash
@@ -36,13 +40,21 @@ const paytmConfig = {
     CHANNEL_ID: 'WAP',
     INDUSTRY_TYPE_ID: 'Retail',
     CALLBACK_URL: 'https://securegw.paytm.in/theia/paytmCallback?ORDER_ID='
+};
+
+...
+
+constructor(props) {
+  super(props);
+  this.emitter = null;
 }
 
 componentWillMount() {
     if (Platform.OS === 'ios') {
         const { RNPayTm } = NativeModules;
-        const emitter = new NativeEventEmitter(RNPayTm);
-        emitter.addListener('PayTMResponse', this.onPayTmResponse);
+        
+        this.emitter = new NativeEventEmitter(RNPayTm);
+        this.emitter.addListener('PayTMResponse', this.onPayTmResponse);
     } else {
         DeviceEventEmitter.addListener('PayTMResponse', this.onPayTmResponse);
     }	
