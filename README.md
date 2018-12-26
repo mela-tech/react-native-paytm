@@ -1,5 +1,5 @@
-![](https://img.shields.io/npm/v/@philly25/react-native-paytm.svg)
-![](https://img.shields.io/npm/dm/@philly25/react-native-paytm.svg)
+[![](https://img.shields.io/npm/v/@philly25/react-native-paytm.svg)](https://www.npmjs.com/package/@philly25/react-native-paytm)
+[![](https://img.shields.io/npm/dm/@philly25/react-native-paytm.svg)](https://www.npmjs.com/package/@philly25/react-native-paytm)
 
 # @philly25/react-native-paytm
 This library has been forked from https://github.com/elanic-tech/react-native-paytm

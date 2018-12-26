@@ -1,7 +1,7 @@
 {
   "name": "@philly25/react-native-paytm",
-  "version": "1.0.7",
-  "description": "A react native wrapper for PayTM",
+  "version": "1.0.8",
+  "description": "Unofficial React Native wrapper for PayTM",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -9,7 +9,7 @@
   },
   "_npmUser": {
     "email": "baldinant@gmail.com",
-    "name": "philly25"
+    "name": "Anton Baldin"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,9 +20,6 @@
   ],
   "author": "Anton Baldin <baldinant@gmail.com>",
   "license": "ISC",
-  "peerDependencies": {
-    "react-native": "^0.50.4"
-  },
   "bugs": {
     "url": "https://github.com/opsway/react-native-paytm/issues"
   },
