@@ -1,3 +1,4 @@
+[![Made by](https://img.shields.io/badge/Made_by-opsway-blue.svg)](https://opsway.com)
 [![](https://img.shields.io/npm/v/@philly25/react-native-paytm.svg)](https://www.npmjs.com/package/@philly25/react-native-paytm)
 [![](https://img.shields.io/npm/dm/@philly25/react-native-paytm.svg)](https://www.npmjs.com/package/@philly25/react-native-paytm)
 
@@ -11,12 +12,19 @@ Updated it to work with the latest version of react-native and latest PayTM SDK.
 npm i --save @philly25/react-native-paytm
 ````
 
-#### Android
+or 
+
+````bash
+yarn add @philly25/react-native-paytm
+````
+
+Link it:
+
 ````bash
 react-native link @philly25/react-native-paytm
 ````
 
-#### iOS
+#### iOS (Manually)
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 2. Go to `node_modules/@philly25/react-native-paytm` and add `RNPayTm.xcodeproj`
