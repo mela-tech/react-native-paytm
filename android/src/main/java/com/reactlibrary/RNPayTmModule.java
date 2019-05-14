@@ -41,7 +41,7 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
     if(options.getString("mode").equals("Production")){
         Service = PaytmPGService.getProductionService();
     } else {
-        Service = PaytmPGService.getStagingService();
+        Service = PaytmPGService.getStagingService("");
     }
     HashMap<String, String> paramMap = new HashMap<String, String>();
     paramMap.put("ORDER_ID", options.getString("ORDER_ID"));
