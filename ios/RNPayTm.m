@@ -31,6 +31,10 @@ RCT_EXPORT_METHOD(startPayment: (NSDictionary *)details)
     orderDict[@"CHECKSUMHASH"] = details[@"CHECKSUMHASH"];
     orderDict[@"CALLBACK_URL"] = details[@"CALLBACK_URL"];
 
+    if (details[@"MERC_UNQ_REF"]) {
+        orderDict[@"MERC_UNQ_REF"] = details[@"MERC_UNQ_REF"];
+    }
+
     PGOrder *order = [PGOrder orderWithParams:orderDict];
 
     PGTransactionViewController* txnController = [[PGTransactionViewController alloc] initTransactionForOrder:order];

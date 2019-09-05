@@ -96,7 +96,7 @@ onPayTmResponse = (resp) => {
     }
   };
 
-runTransaction(amount, customerId, orderId, mobile, email, checkSum) {
+runTransaction(amount, customerId, orderId, mobile, email, checkSum, mercUnqRef) {
     const callbackUrl = `${paytmConfig.CALLBACK_URL}${orderId}`;
     const details = {
         mode: 'Staging', // 'Staging' or 'Production'
@@ -111,6 +111,7 @@ runTransaction(amount, customerId, orderId, mobile, email, checkSum) {
         CUST_ID: customerId, // String
         CHECKSUMHASH: checkSum, //From your server using PayTM Checksum Utility 
         CALLBACK_URL: callbackUrl,
+        MERC_UNQ_REF: mercUnqRef, // optional
     };
     
     paytm.startPayment(details);
