@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E7EA79021C9A14400B4615A /* libPaymentsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7EA78F21C9A14400B4615A /* libPaymentsSDK.a */; };
+		8E0D811E2344C8DE007FE4B4 /* PaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0D811D2344C8DE007FE4B4 /* PaymentSDK.framework */; };
 		B3E7B58A1CC2AC0600A0062D /* RNPayTm.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNPayTm.m */; };
 /* End PBXBuildFile section */
 
@@ -25,13 +25,7 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNPayTm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNPayTm.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E7EA78A21C9A14300B4615A /* PGMerchantConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMerchantConfiguration.h; sourceTree = "<group>"; };
-		8E7EA78B21C9A14300B4615A /* PGOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGOrder.h; sourceTree = "<group>"; };
-		8E7EA78C21C9A14300B4615A /* PaymentsSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsSDK.h; sourceTree = "<group>"; };
-		8E7EA78D21C9A14300B4615A /* PGServerEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGServerEnvironment.h; sourceTree = "<group>"; };
-		8E7EA78E21C9A14300B4615A /* PGTransactionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTransactionViewController.h; sourceTree = "<group>"; };
-		8E7EA78F21C9A14400B4615A /* libPaymentsSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentsSDK.a; sourceTree = "<group>"; };
-		970307301D3F64EF007977F0 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; name = .DS_Store; path = sdk/.DS_Store; sourceTree = "<group>"; };
+		8E0D811D2344C8DE007FE4B4 /* PaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PaymentSDK.framework; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNPayTm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNPayTm.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNPayTm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNPayTm.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E7EA79021C9A14400B4615A /* libPaymentsSDK.a in Frameworks */,
+				8E0D811E2344C8DE007FE4B4 /* PaymentSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,13 +53,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				8E7EA78F21C9A14400B4615A /* libPaymentsSDK.a */,
-				8E7EA78C21C9A14300B4615A /* PaymentsSDK.h */,
-				8E7EA78A21C9A14300B4615A /* PGMerchantConfiguration.h */,
-				8E7EA78B21C9A14300B4615A /* PGOrder.h */,
-				8E7EA78D21C9A14300B4615A /* PGServerEnvironment.h */,
-				8E7EA78E21C9A14300B4615A /* PGTransactionViewController.h */,
-				970307301D3F64EF007977F0 /* .DS_Store */,
+				8E0D811D2344C8DE007FE4B4 /* PaymentSDK.framework */,
 				B3E7B5881CC2AC0600A0062D /* RNPayTm.h */,
 				B3E7B5891CC2AC0600A0062D /* RNPayTm.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -111,6 +99,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -232,6 +221,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -255,6 +248,10 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
