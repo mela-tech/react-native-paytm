@@ -1,6 +1,8 @@
 #import "RNPayTm.h"
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
+#import <UIKit/UIActivity.h>
+#import <PaymentSDK/PaymentSDK-swift.h>
 
 @implementation RNPayTm
 
