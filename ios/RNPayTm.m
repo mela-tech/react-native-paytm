@@ -1,8 +1,6 @@
 #import "RNPayTm.h"
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventEmitter.h>
-#import <UIKit/UIActivity.h>
-#import <PaymentSDK/PaymentSDK-swift.h>
 
 @implementation RNPayTm
 
@@ -27,14 +25,18 @@ RCT_EXPORT_METHOD(startPayment: (NSDictionary *)details)
     orderDict[@"WEBSITE"] = details[@"WEBSITE"];
     orderDict[@"TXN_AMOUNT"] = details[@"TXN_AMOUNT"];
     orderDict[@"ORDER_ID"] = details[@"ORDER_ID"];
-    orderDict[@"EMAIL"] = details[@"EMAIL"];
-    orderDict[@"MOBILE_NO"] = details[@"MOBILE_NO"];
     orderDict[@"CUST_ID"] = details[@"CUST_ID"];
     orderDict[@"CHECKSUMHASH"] = details[@"CHECKSUMHASH"];
     orderDict[@"CALLBACK_URL"] = details[@"CALLBACK_URL"];
 
     if (details[@"MERC_UNQ_REF"]) {
         orderDict[@"MERC_UNQ_REF"] = details[@"MERC_UNQ_REF"];
+    }
+    if (details[@"EMAIL"]) {
+        orderDict[@"EMAIL"] = details[@"EMAIL"];
+    }
+    if (details[@"MOBILE_NO"]) {
+        orderDict[@"MOBILE_NO"] = details[@"MOBILE_NO"];
     }
 
     PGOrder *order = [PGOrder orderWithParams:orderDict];
