@@ -8,6 +8,13 @@ Updated it to work with the latest version of react-native and latest PayTM SDK.
 
 ### Installation
 
+
+| react-native-paytm | react-native |
+|:-------------------|:-------------|
+| 1.0.11             | < 0.60       |
+| 1.0.12             | >= 0.60      |
+
+
 ````bash
 npm i --save @philly25/react-native-paytm
 ````
@@ -18,19 +25,66 @@ or
 yarn add @philly25/react-native-paytm
 ````
 
+
+
+#### For RN < 0.60
+
 Link it:
 
 ````bash
 react-native link @philly25/react-native-paytm
 ````
 
-#### iOS (Manually)
+#### For RN >= 0.60
+
+Use CocoaPods installation if auto-linking doesn't work.
+
+### CocoaPods
+
+Add to your Podfile:
+ 
+```
+pod 'RNPayTm', :path => '../node_modules/@philly25/react-native-paytm'
+```
+
+Install it: 
+
+```bash
+pod install && pod update
+```
+
+If it's not gonna work, then add `libPaymentsSDK.a` to "Link Binary With Libraries" Build Phase for the RNPayTm target (in Pods project).
+
+### iOS (Manually)
 
 1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
 2. Go to `node_modules/@philly25/react-native-paytm` and add `RNPayTm.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libRNPayTm.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)
       
+
+## Methods
+
+*`startPayment(details: PayTmPaymentDetails): void`*
+ 
+
+```flow js
+type PayTmPaymentDetails = {
+  mode: 'Staging' | 'Production',
+  MID: string,
+  INDUSTRY_TYPE_ID: string,
+  WEBSITE: string,
+  CHANNEL_ID: string,
+  TXN_AMOUNT: string,
+  ORDER_ID: string,
+  EMAIL?: string,
+  MOBILE_NO?: string,
+  CUST_ID: string,
+  CHECKSUMHASH: string, 
+  CALLBACK_URL: string,
+  MERC_UNQ_REF?: string,
+};
+```
 
 ## Usage
 
