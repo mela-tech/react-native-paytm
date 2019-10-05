@@ -93,8 +93,9 @@ For more details check official documentation: [iOS](https://developer.paytm.com
 Example:
 
 ```javascript
+import React from 'react';
+import { Platform } from 'react-native';
 import Paytm from '@philly25/react-native-paytm';
-import { Platform, DeviceEventEmitter, NativeModules, NativeEventEmitter } from 'react-native';
 
 // Data received from PayTM
 const paytmConfig = {
@@ -105,70 +106,54 @@ const paytmConfig = {
     CALLBACK_URL: 'https://securegw.paytm.in/theia/paytmCallback?ORDER_ID='
 };
 
-...
-
-constructor(props) {
-  super(props);
-  this.emitter = null;
-}
-
-componentWillMount() {
-    if (Platform.OS === 'ios') {
-        const { RNPayTm } = NativeModules;
-        
-        this.emitter = new NativeEventEmitter(RNPayTm);
-        this.emitter.addListener('PayTMResponse', this.onPayTmResponse);
-    } else {
-        DeviceEventEmitter.addListener('PayTMResponse', this.onPayTmResponse);
-    }	
-}
-
-componentWillUnmount() {
-    if (Platform.OS === 'ios') {
-        this.emitter.removeListener('PayTMResponse', this.onPayTmResponse);
-    } else {
-        DeviceEventEmitter.removeListener('PayTMResponse', this.onPayTmResponse);
+export default class Test extends React.Component {
+    componentWillMount() {
+        Paytm.addListener(Paytm.Events.PAYTM_RESPONSE, this.onPayTmResponse);
     }
-}
-
-onPayTmResponse = (resp) => {
-    const {STATUS, status, response} = resp;
-
-    if (Platform.OS === 'ios') {
-      if (status === 'Success') {
-        const jsonResponse = JSON.parse(response);
-        const {STATUS} = jsonResponse;
-
-        if (STATUS && STATUS === 'TXN_SUCCESS') {
-          // Payment succeed!
-        }
-      }
-    } else {
-      if (STATUS && STATUS === 'TXN_SUCCESS') {
-        // Payment succeed!
-      }
-    }
-  };
-
-runTransaction(amount, customerId, orderId, mobile, email, checkSum, mercUnqRef) {
-    const callbackUrl = `${paytmConfig.CALLBACK_URL}${orderId}`;
-    const details = {
-        mode: 'Staging', // 'Staging' or 'Production'
-        MID: paytmConfig.MID,
-        INDUSTRY_TYPE_ID: paytmConfig.INDUSTRY_TYPE_ID,
-        WEBSITE: paytmConfig.WEBSITE,
-        CHANNEL_ID: paytmConfig.CHANNEL_ID,
-        TXN_AMOUNT: `${amount}`, // String
-        ORDER_ID: orderId, // String
-        EMAIL: email, // String
-        MOBILE_NO: mobile, // String
-        CUST_ID: customerId, // String
-        CHECKSUMHASH: checkSum, //From your server using PayTM Checksum Utility 
-        CALLBACK_URL: callbackUrl,
-        MERC_UNQ_REF: mercUnqRef, // optional
-    };
     
-    paytm.startPayment(details);
+    componentWillUnmount() {
+        Paytm.removeListener(Paytm.Events.PAYTM_RESPONSE, this.onPayTmResponse);
+    }
+    
+    onPayTmResponse = (resp) => {
+        const {STATUS, status, response} = resp;
+    
+        if (Platform.OS === 'ios') {
+          if (status === 'Success') {
+            const jsonResponse = JSON.parse(response);
+            const {STATUS} = jsonResponse;
+    
+            if (STATUS && STATUS === 'TXN_SUCCESS') {
+              // Payment succeed!
+            }
+          }
+        } else {
+          if (STATUS && STATUS === 'TXN_SUCCESS') {
+            // Payment succeed!
+          }
+        }
+      };
+    
+    runTransaction(amount, customerId, orderId, mobile, email, checkSum, mercUnqRef) {
+        const callbackUrl = `${paytmConfig.CALLBACK_URL}${orderId}`;
+        const details = {
+            mode: 'Staging', // 'Staging' or 'Production'
+            MID: paytmConfig.MID,
+            INDUSTRY_TYPE_ID: paytmConfig.INDUSTRY_TYPE_ID,
+            WEBSITE: paytmConfig.WEBSITE,
+            CHANNEL_ID: paytmConfig.CHANNEL_ID,
+            TXN_AMOUNT: `${amount}`, // String
+            ORDER_ID: orderId, // String
+            EMAIL: email, // String
+            MOBILE_NO: mobile, // String
+            CUST_ID: customerId, // String
+            CHECKSUMHASH: checkSum, //From your server using PayTM Checksum Utility 
+            CALLBACK_URL: callbackUrl,
+            MERC_UNQ_REF: mercUnqRef, // optional
+        };
+        
+        Paytm.startPayment(details);
+    }
 }
 ```
   
