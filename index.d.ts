@@ -35,27 +35,14 @@ interface PaytmResponseIos {
     CHECKSUMHASH: string;
 }
 
-interface PaytmResponseAndroid {
-    ORDERID: string;
-    MID: string;
-    TXNID: string;
-    TXNAMOUNT: string;
-    PAYMENTMODE: string;
-    CURRENCY: string;
-    TXNDATE: string;
-    STATUS: string;
-    RESPCODE: string;
-    RESPMSG: string;
-    GATEWAYNAME: string;
-    BANKTXNID: string;
-    BANKNAME: string;
-    CHECKSUMHASH: string;
+interface PaytmResponseAndroid extends PaytmResponseIos {
+    status: string;
 }
 
 export const Events: PaytmEvents;
 
 export function startPayment(details: PayTmPaymentDetails): void;
 
-export function addListener(event: string, handler: (response) => void): void;
+export function addListener(event: string, handler: (response: PaytmResponseIos | PaytmResponseAndroid) => void): void;
 
-export function removeListener(event: string, handler: (response) => void): void;
+export function removeListener(event: string, handler: (response: PaytmResponseIos | PaytmResponseAndroid) => void): void;
