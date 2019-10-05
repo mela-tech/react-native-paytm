@@ -93,7 +93,7 @@ For more details check official documentation: [iOS](https://developer.paytm.com
 Example:
 
 ```javascript
-import paytm from '@philly25/react-native-paytm';
+import Paytm from '@philly25/react-native-paytm';
 import { Platform, DeviceEventEmitter, NativeModules, NativeEventEmitter } from 'react-native';
 
 // Data received from PayTM

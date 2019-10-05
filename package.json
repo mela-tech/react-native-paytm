@@ -26,5 +26,6 @@
   "homepage": "https://github.com/opsway/react-native-paytm#readme",
   "directories": {
     "example": "example"
-  }
+  },
+  "types": "index.d.ts"
 }
