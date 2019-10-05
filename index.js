@@ -15,15 +15,15 @@ function addListener(eventName, handler) {
   }
 }
 
-function removeListeners() {
+function removeListener(eventName, handler) {
   if (EventEmitter) {
-    EventEmitter.removeListeners();
+    EventEmitter.removeListener(eventName, handler);
   }
 }
 
 export default {
-  startPayment,
-  addListener,
   Events,
-  removeListeners
+  addListener,
+  removeListener,
+  startPayment
 };
