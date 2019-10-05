@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/opsway/react-native-paytm.git", :tag => "v#{s.version}" }
   s.source_files  = "ios/**/*.{h,m}"
+  s.ios.vendored_library = "ios/libPaymentsSDK.a"
 
   s.dependency 'React'
 end

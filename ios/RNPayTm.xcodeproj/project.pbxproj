@@ -7,31 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E7EA79021C9A14400B4615A /* libPaymentsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7EA78F21C9A14400B4615A /* libPaymentsSDK.a */; };
+		8E7F18812347BA76006C66EF /* PGServerEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F187C2347BA76006C66EF /* PGServerEnvironment.h */; };
+		8E7F18822347BA76006C66EF /* PaymentsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F187D2347BA76006C66EF /* PaymentsSDK.h */; };
+		8E7F18832347BA76006C66EF /* PGMerchantConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F187E2347BA76006C66EF /* PGMerchantConfiguration.h */; };
+		8E7F18842347BA76006C66EF /* PGOrder.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F187F2347BA76006C66EF /* PGOrder.h */; };
+		8E7F18852347BA76006C66EF /* PGTransactionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E7F18802347BA76006C66EF /* PGTransactionViewController.h */; };
+		8E7F18872347BA7D006C66EF /* libPaymentsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7F18862347BA7D006C66EF /* libPaymentsSDK.a */; };
 		B3E7B58A1CC2AC0600A0062D /* RNPayTm.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNPayTm.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		58B511D91A9E6C8500147676 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNPayTm.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNPayTm.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E7EA78A21C9A14300B4615A /* PGMerchantConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMerchantConfiguration.h; sourceTree = "<group>"; };
-		8E7EA78B21C9A14300B4615A /* PGOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGOrder.h; sourceTree = "<group>"; };
-		8E7EA78C21C9A14300B4615A /* PaymentsSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsSDK.h; sourceTree = "<group>"; };
-		8E7EA78D21C9A14300B4615A /* PGServerEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGServerEnvironment.h; sourceTree = "<group>"; };
-		8E7EA78E21C9A14300B4615A /* PGTransactionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTransactionViewController.h; sourceTree = "<group>"; };
-		8E7EA78F21C9A14400B4615A /* libPaymentsSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentsSDK.a; sourceTree = "<group>"; };
-		970307301D3F64EF007977F0 /* .DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; name = .DS_Store; path = sdk/.DS_Store; sourceTree = "<group>"; };
+		8E7F187C2347BA76006C66EF /* PGServerEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGServerEnvironment.h; sourceTree = "<group>"; };
+		8E7F187D2347BA76006C66EF /* PaymentsSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentsSDK.h; sourceTree = "<group>"; };
+		8E7F187E2347BA76006C66EF /* PGMerchantConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMerchantConfiguration.h; sourceTree = "<group>"; };
+		8E7F187F2347BA76006C66EF /* PGOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGOrder.h; sourceTree = "<group>"; };
+		8E7F18802347BA76006C66EF /* PGTransactionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGTransactionViewController.h; sourceTree = "<group>"; };
+		8E7F18862347BA7D006C66EF /* libPaymentsSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentsSDK.a; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNPayTm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNPayTm.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNPayTm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNPayTm.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,7 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E7EA79021C9A14400B4615A /* libPaymentsSDK.a in Frameworks */,
+				8E7F18872347BA7D006C66EF /* libPaymentsSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,13 +51,12 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				8E7EA78F21C9A14400B4615A /* libPaymentsSDK.a */,
-				8E7EA78C21C9A14300B4615A /* PaymentsSDK.h */,
-				8E7EA78A21C9A14300B4615A /* PGMerchantConfiguration.h */,
-				8E7EA78B21C9A14300B4615A /* PGOrder.h */,
-				8E7EA78D21C9A14300B4615A /* PGServerEnvironment.h */,
-				8E7EA78E21C9A14300B4615A /* PGTransactionViewController.h */,
-				970307301D3F64EF007977F0 /* .DS_Store */,
+				8E7F18862347BA7D006C66EF /* libPaymentsSDK.a */,
+				8E7F187D2347BA76006C66EF /* PaymentsSDK.h */,
+				8E7F187E2347BA76006C66EF /* PGMerchantConfiguration.h */,
+				8E7F187F2347BA76006C66EF /* PGOrder.h */,
+				8E7F187C2347BA76006C66EF /* PGServerEnvironment.h */,
+				8E7F18802347BA76006C66EF /* PGTransactionViewController.h */,
 				B3E7B5881CC2AC0600A0062D /* RNPayTm.h */,
 				B3E7B5891CC2AC0600A0062D /* RNPayTm.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -74,14 +65,29 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		8E4A9EDA2345246C00F5DA86 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E7F18822347BA76006C66EF /* PaymentsSDK.h in Headers */,
+				8E7F18832347BA76006C66EF /* PGMerchantConfiguration.h in Headers */,
+				8E7F18842347BA76006C66EF /* PGOrder.h in Headers */,
+				8E7F18812347BA76006C66EF /* PGServerEnvironment.h in Headers */,
+				8E7F18852347BA76006C66EF /* PGTransactionViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		58B511DA1A9E6C8500147676 /* RNPayTm */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "RNPayTm" */;
 			buildPhases = (
+				8E4A9EDA2345246C00F5DA86 /* Headers */,
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
-				58B511D91A9E6C8500147676 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -111,6 +117,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -232,6 +239,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -255,6 +266,10 @@
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
