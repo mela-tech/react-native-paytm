@@ -51,14 +51,24 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
     paramMap.put("INDUSTRY_TYPE_ID", options.getString("INDUSTRY_TYPE_ID"));
     paramMap.put("WEBSITE", options.getString("WEBSITE"));
     paramMap.put("TXN_AMOUNT", options.getString("TXN_AMOUNT"));
-    paramMap.put("EMAIL", options.getString("EMAIL"));
-    paramMap.put("MOBILE_NO", options.getString("MOBILE_NO"));
+   
+    //email and mobile may not be mandatory
+    if (options.hasKey("EMAIL")) {
+        paramMap.put("EMAIL", options.getString("EMAIL"));
+    }
+    
+    if (options.hasKey("MOBILE_NO")) {
+        paramMap.put("MOBILE_NO", options.getString("MOBILE_NO"));
+    }
+
     paramMap.put("CALLBACK_URL", options.getString("CALLBACK_URL"));
     paramMap.put("CHECKSUMHASH", options.getString("CHECKSUMHASH"));
 
     if (options.hasKey("MERC_UNQ_REF")) {
         paramMap.put("MERC_UNQ_REF", options.getString("MERC_UNQ_REF"));
     }
+
+    Log.d("RNPayTm", "INPUT PARAMS: " + paramMap);
 
     PaytmOrder Order = new PaytmOrder(paramMap);
 
