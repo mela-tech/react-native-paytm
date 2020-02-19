@@ -34,7 +34,7 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
 
     @Override
     public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
-      if (requestCode == REQUEST_CODE) {
+      if (requestCode == REQUEST_CODE && data != null) {
         WritableMap params = new WritableNativeMap();
         params.putString("status", data.getStringExtra("nativeSdkForMerchantMessage")  + data.getStringExtra("response"));
         sendEvent( "PayTMResponse", params);
