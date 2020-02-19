@@ -1,15 +1,11 @@
 {
-  "name": "@philly25/react-native-paytm",
+  "name": "react-native-paytm",
   "version": "1.0.12",
-  "description": "Unofficial React Native wrapper for PayTM",
+  "description": "Unofficial React Native wrapper for PayTM INVOKE",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/opsway/react-native-paytm.git"
-  },
-  "_npmUser": {
-    "email": "baldinant@gmail.com",
-    "name": "Anton Baldin"
+    "url": "git+https://github.com/mela-tech/react-native-paytm.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,9 +17,9 @@
   "author": "Anton Baldin <baldinant@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/opsway/react-native-paytm/issues"
+    "url": "https://github.com/mela-tech/react-native-paytm/issues"
   },
-  "homepage": "https://github.com/opsway/react-native-paytm#readme",
+  "homepage": "https://github.com/mela-tech/react-native-paytm#readme",
   "directories": {
     "example": "example"
   },

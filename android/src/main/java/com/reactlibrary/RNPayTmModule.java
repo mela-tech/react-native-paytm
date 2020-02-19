@@ -1,12 +1,15 @@
 
 package com.reactlibrary;
 
-import java.util.HashMap;
 import android.app.Activity;
 import javax.annotation.Nullable;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.facebook.react.bridge.ActivityEventListener;
+import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -15,17 +18,33 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-
 import com.paytm.pgsdk.PaytmOrder;
-import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
+import com.paytm.pgsdk.TransactionManager;
 
 public class RNPayTmModule extends ReactContextBaseJavaModule {
 
+  private TransactionManager transactionManager;
+
   private final ReactApplicationContext reactContext;
+
+  private static final int  REQUEST_CODE = 121;
+
+  private final ActivityEventListener mActivityEventListener = new BaseActivityEventListener() {
+
+    @Override
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+      if (requestCode == REQUEST_CODE) {
+        WritableMap params = new WritableNativeMap();
+        params.putString("status", data.getStringExtra("nativeSdkForMerchantMessage")  + data.getStringExtra("response"));
+        sendEvent( "PayTMResponse", params);
+      }
+    }
+  };
 
   public RNPayTmModule(ReactApplicationContext reactContext) {
     super(reactContext);
+    reactContext.addActivityEventListener(mActivityEventListener);
     this.reactContext = reactContext;
   }
 
@@ -36,52 +55,15 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void startPayment(ReadableMap options) {
-    Activity currentActivity = getCurrentActivity();
-    PaytmPGService Service;
-    if(options.getString("mode").equals("Production")){
-        Service = PaytmPGService.getProductionService();
-    } else {
-        Service = PaytmPGService.getStagingService("");
-    }
-    HashMap<String, String> paramMap = new HashMap<String, String>();
-    paramMap.put("ORDER_ID", options.getString("ORDER_ID"));
-    paramMap.put("MID", options.getString("MID"));
-    paramMap.put("CUST_ID", options.getString("CUST_ID"));
-    paramMap.put("CHANNEL_ID", options.getString("CHANNEL_ID"));
-    paramMap.put("INDUSTRY_TYPE_ID", options.getString("INDUSTRY_TYPE_ID"));
-    paramMap.put("WEBSITE", options.getString("WEBSITE"));
-    paramMap.put("TXN_AMOUNT", options.getString("TXN_AMOUNT"));
-   
-    //email and mobile may not be mandatory
-    if (options.hasKey("EMAIL")) {
-        paramMap.put("EMAIL", options.getString("EMAIL"));
-    }
-    
-    if (options.hasKey("MOBILE_NO")) {
-        paramMap.put("MOBILE_NO", options.getString("MOBILE_NO"));
-    }
 
-    paramMap.put("CALLBACK_URL", options.getString("CALLBACK_URL"));
-    paramMap.put("CHECKSUMHASH", options.getString("CHECKSUMHASH"));
+    PaytmOrder Order = new PaytmOrder(
+            options.getString("orderId"),
+            options.getString("mid"),
+            options.getString("txnToken"),
+            options.getString("amount"),
+            options.getString("callbackUrl"));
 
-    if (options.hasKey("MERC_UNQ_REF")) {
-        paramMap.put("MERC_UNQ_REF", options.getString("MERC_UNQ_REF"));
-    }
-
-    Log.d("RNPayTm", "INPUT PARAMS: " + paramMap);
-
-    PaytmOrder Order = new PaytmOrder(paramMap);
-
-/*
-    PaytmMerchant Merchant = new PaytmMerchant(
-        options.getString("generationUrl"),
-        options.getString("validationUrl"));
-
-    Service.initialize(Order, Merchant, null);
-*/
-    Service.initialize(Order, null);
-
-    Service.startPaymentTransaction(getCurrentActivity(), true, true, new PaytmPaymentTransactionCallback() {
+    transactionManager = new TransactionManager(Order, new PaytmPaymentTransactionCallback() {
       @Override
       public void someUIErrorOccurred(String inErrorMessage) {
         Log.d("RNPayTm", "Some UI Error Occurred: " + inErrorMessage);
@@ -139,7 +121,10 @@ public class RNPayTmModule extends ReactContextBaseJavaModule {
         sendEvent( "PayTMResponse", params);
       }
     });
+    transactionManager.startTransaction(getCurrentActivity(), REQUEST_CODE);
+
   }
+
 
   private void sendEvent(String eventName, @Nullable WritableMap params) {
   reactContext

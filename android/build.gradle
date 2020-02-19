@@ -1,3 +1,7 @@
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 buildscript {
     repositories {
         jcenter()
@@ -12,12 +16,13 @@ buildscript {
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion safeExtGet('compileSdkVersion', 28)
+    buildToolsVersion safeExtGet('buildToolsVersion', '28.0.3')
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 28
+        minSdkVersion safeExtGet('minSdkVersion', 16)
+        targetSdkVersion safeExtGet('targetSdkVersion', 28)
+
         versionCode 1
         versionName "1.0"
         ndk {
@@ -31,8 +36,15 @@ android {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation('com.paytm:pgplussdk:1.4.0') {
-        transitive = true
+    implementation 'com.paytm.appinvokesdk:appinvokesdk:0.6'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url "https://artifactory.paytm.in/libs-release-local"
+        name 'paytm'
     }
 }
 
